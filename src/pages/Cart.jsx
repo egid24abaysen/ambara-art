@@ -31,19 +31,20 @@ export default function Cart() {
     }
   };
 
-  // utils.js or inside your Cart.jsx component
+  // In your Cart.jsx component
 
-const openWhatsApp = (message) => {
-    const url = `https://wa.me/250790031001?text=${encodeURIComponent(message)}`;
-    
-    // Option 1: Try to open a new tab (may be blocked)
-    const newWindow = window.open(url, '_blank');
-    
-    // If blocked (newWindow is null), Option 2: Redirect the current page
-    if (!newWindow || newWindow.closed || typeof newWindow.closed === 'undefined') {
-        window.location.href = url;
-    }
+const checkout = () => {
+    const lines = snap.cart
+      .map(c => `${c.qty}x ${c.name} (${c.price})`)
+      .join('\n');
+
+    const message = `Hello Ambara Art! 👋\n\nI'd like to order:\n${lines}\n\nTotal: RWF ${total.toLocaleString()}\n\nPlease send payment and delivery details. Thank you!`;
+
+    // Use the robust utility function
+    openWhatsApp(message);
 };
+
+
 
   return (
     <div className={`cart-drawer ${snap.cartOpen ? 'open' : ''}`}>
