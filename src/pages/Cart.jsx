@@ -17,13 +17,33 @@ export default function Cart() {
     if (item) item.qty = Math.max(1, item.qty + d);
   };
 
-  const checkout = () => {
-    const lines = snap.cart.map(c => `${c.qty}x ${c.name} (${c.price})`).join('\n');
-    const msg = encodeURIComponent(
-      `Hello Ambara Art! 👋\n\nI'd like to order:\n${lines}\n\nTotal: RWF ${total.toLocaleString()}\n\nPlease send payment and delivery details. Thank you!`
-    );
-    window.open(`https://wa.me/250790031001?text=${msg}`, '_blank');
+  // utils.js or inside your Cart.jsx component
+
+  const openWhatsApp = (message) => {
+    const url = `https://wa.me/250790031001?text=${encodeURIComponent(message)}`;
+    
+    // Option 1: Try to open a new tab (may be blocked)
+    const newWindow = window.open(url, '_blank');
+    
+    // If blocked (newWindow is null), Option 2: Redirect the current page
+    if (!newWindow || newWindow.closed || typeof newWindow.closed === 'undefined') {
+        window.location.href = url;
+    }
   };
+
+  // utils.js or inside your Cart.jsx component
+
+const openWhatsApp = (message) => {
+    const url = `https://wa.me/250790031001?text=${encodeURIComponent(message)}`;
+    
+    // Option 1: Try to open a new tab (may be blocked)
+    const newWindow = window.open(url, '_blank');
+    
+    // If blocked (newWindow is null), Option 2: Redirect the current page
+    if (!newWindow || newWindow.closed || typeof newWindow.closed === 'undefined') {
+        window.location.href = url;
+    }
+};
 
   return (
     <div className={`cart-drawer ${snap.cartOpen ? 'open' : ''}`}>
