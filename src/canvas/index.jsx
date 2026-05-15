@@ -1,7 +1,7 @@
 import { Canvas } from '@react-three/fiber';
 import { Center, Environment, Preload, OrbitControls } from '@react-three/drei';
 import { useSnapshot } from 'valtio';
-import { Suspense } from 'react';
+import { Suspense, useEffect, useRef } from 'react';
 import Shirt from './Shirt';
 import HoodieInner from './Hoodie';
 import Backdrop from './Backdrop';
@@ -10,6 +10,15 @@ import state from '../store';
 
 const CanvasModel = () => {
   const snap = useSnapshot(state);
+  const orbitRef = useRef();
+
+  // When the user exits explore mode, reset OrbitControls so the camera
+  // target snaps back to origin before CameraRig's damp3 takes over.
+  useEffect(() => {
+    if (!snap.orbitEnabled && orbitRef.current) {
+      orbitRef.current.reset();
+    }
+  }, [snap.orbitEnabled]);
 
   return (
     <Canvas
@@ -27,6 +36,7 @@ const CanvasModel = () => {
 
       {/* OrbitControls: free exploration mode — drag to orbit, scroll/pinch to zoom */}
       <OrbitControls
+        ref={orbitRef}
         enabled={snap.orbitEnabled}
         enableDamping
         dampingFactor={0.08}
@@ -36,7 +46,7 @@ const CanvasModel = () => {
         maxDistance={6}
         enablePan={false}
         touches={{
-          ONE: 1, /* ROTATE */
+          ONE: 1,   /* ROTATE */
           TWO: 512, /* DOLLY_PAN — pinch zoom */
         }}
       />
