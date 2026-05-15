@@ -1,0 +1,121 @@
+/* ── Dock — Ambara Art dark-gold theme ── */
+
+/* ── Outer spring container ── */
+.dock-outer {
+  display: flex;
+  align-items: flex-end;
+}
+.dock-outer-vertical {
+  align-items: flex-start;
+  overflow: visible;
+}
+/* Horizontal: no height animation — items overflow upward */
+.dock-outer-horizontal {
+  overflow: visible;
+  align-items: center;
+}
+
+/* ── Panel (the pill) ── */
+.dock-panel {
+  display: flex;
+  align-items: flex-end;
+  gap: 6px;
+  border-radius: 18px;
+  background: rgba(8, 0, 22, 0.84);
+  backdrop-filter: blur(22px) saturate(1.4);
+  -webkit-backdrop-filter: blur(22px) saturate(1.4);
+  border: 1px solid rgba(201, 162, 39, 0.22);
+  padding: 0 8px 8px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255,255,255,0.03) inset;
+}
+
+/* vertical variant — column layout, left-side pill */
+.dock-panel-vertical {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  flex-direction: column;
+  align-items: flex-end;
+  height: fit-content;
+  border-radius: 0 18px 18px 0;
+  border-left: none;
+  padding: 8px 8px 8px 0;
+}
+
+/* horizontal variant — fixed height, items overflow upward */
+.dock-panel-horizontal {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border-radius: 18px;
+  background: rgba(8, 0, 22, 0.84);
+  backdrop-filter: blur(22px) saturate(1.4);
+  -webkit-backdrop-filter: blur(22px) saturate(1.4);
+  border: 1px solid rgba(201, 162, 39, 0.22);
+  padding: 0 10px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.03) inset;
+  overflow: visible;
+}
+
+/* ── Item ── */
+.dock-item {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  background: rgba(12, 0, 30, 0.8);
+  border: 1px solid rgba(201, 162, 39, 0.16);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+  cursor: pointer;
+  outline: none;
+  color: rgba(232, 213, 255, 0.6);
+  transition: border-color 0.2s, background 0.2s, color 0.2s, box-shadow 0.2s;
+}
+.dock-item:hover {
+  border-color: rgba(201, 162, 39, 0.5);
+  background: rgba(201, 162, 39, 0.1);
+  color: #c9a227;
+  box-shadow: 0 0 16px rgba(201, 162, 39, 0.22);
+}
+.dock-item-active {
+  border-color: rgba(201, 162, 39, 0.55) !important;
+  background: rgba(201, 162, 39, 0.16) !important;
+  color: #c9a227 !important;
+  box-shadow: 0 0 20px rgba(201, 162, 39, 0.28) !important;
+}
+
+/* ── Icon wrapper ── */
+.dock-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ── Tooltip label — above (horizontal) ── */
+.dock-label {
+  position: absolute;
+  top: -2.2rem;
+  left: 50%;
+  width: max-content;
+  white-space: nowrap;
+  border-radius: 8px;
+  border: 1px solid rgba(201, 162, 39, 0.22);
+  background: rgba(8, 0, 22, 0.94);
+  backdrop-filter: blur(14px);
+  padding: 3px 10px;
+  font-size: 0.58rem;
+  font-family: 'Major Mono Display', monospace;
+  letter-spacing: 0.08em;
+  color: #c9a227;
+  pointer-events: none;
+  z-index: 60;
+}
+
+/* ── Tooltip label — right side (vertical) ── */
+.dock-label-right {
+  top: 50%;
+  left: calc(100% + 10px);
+  transform: translateY(-50%) !important;
+}
