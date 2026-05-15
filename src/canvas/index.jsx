@@ -1,5 +1,6 @@
 import { Canvas } from '@react-three/fiber';
 import { Center, Environment, Preload, OrbitControls } from '@react-three/drei';
+import * as THREE from 'three';
 import { useSnapshot } from 'valtio';
 import { Suspense, useEffect, useRef } from 'react';
 import Shirt from './Shirt';
@@ -26,6 +27,7 @@ const CanvasModel = () => {
       camera={{ position: [0, 0, 2.5], fov: 25 }}
       gl={{ preserveDrawingBuffer: true, antialias: true, powerPreference: 'high-performance' }}
       className="w-full max-w-full h-full transition-all ease-in"
+      style={{ touchAction: 'none' }}
     >
       {/* Bright neutral lighting so shirt colour is clearly visible */}
       <ambientLight intensity={1.2} />
@@ -38,6 +40,7 @@ const CanvasModel = () => {
       <OrbitControls
         ref={orbitRef}
         enabled={snap.orbitEnabled}
+        makeDefault
         enableDamping
         dampingFactor={0.08}
         rotateSpeed={0.6}
@@ -46,8 +49,8 @@ const CanvasModel = () => {
         maxDistance={6}
         enablePan={false}
         touches={{
-          ONE: 1,   /* ROTATE */
-          TWO: 512, /* DOLLY_PAN — pinch zoom */
+          ONE: THREE.TOUCH.ROTATE,    // single finger → rotate
+          TWO: THREE.TOUCH.DOLLY_PAN, // two fingers  → pinch zoom
         }}
       />
 
