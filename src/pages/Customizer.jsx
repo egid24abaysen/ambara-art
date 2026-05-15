@@ -72,9 +72,13 @@ export default function Customizer() {
               zIndex: (!snap.orbitEnabled && snap.isLogoTexture) ? 5 : 0,
               cursor: (!snap.orbitEnabled && snap.isLogoTexture) ? 'crosshair' : 'default',
               pointerEvents: snap.orbitEnabled ? 'none' : 'auto',
+              touchAction: snap.orbitEnabled ? 'none' : 'auto',
             }}
             onMouseDown={onMouseDown} onMouseMove={onMouseMove}
             onMouseUp={onMouseUp} onMouseLeave={onMouseUp}
+            onTouchStart={e => onMouseDown(e.touches[0])}
+            onTouchMove={e => onMouseMove(e.touches[0])}
+            onTouchEnd={onMouseUp}
           />
 
           {/* ── Left sidebar — vertical Dock ── */}
